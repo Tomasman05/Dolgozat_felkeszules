@@ -8,7 +8,7 @@ public class Exercise {
         for(Employee emp : emplist){
            res+= emp.getnSalary();
         }
-        
+        System.out.println(res);
         return res;
     }
 }

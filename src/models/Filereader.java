@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Filereader {
-    public void readFile(){
+    public void readFile() {
         try {
             tryReadFile();
         } catch (FileNotFoundException e) {
@@ -14,14 +14,17 @@ public class Filereader {
             System.err.println(e.getMessage());
         }
     }
-    public void tryReadFile()throws FileNotFoundException{
+
+    public void tryReadFile() throws FileNotFoundException {
         File file = new File("dolgozok.txt");
         Scanner sc = new Scanner(file, "utf-8");
         sc.nextLine();
-        while(sc.hasNextLine()){
-            String line = sc.nextLine();
-            String [] list =line.split(";");
+        while (sc.hasNextLine()) {
+            String lineB = sc.nextLine();
+            String line = lineB.replace("\"", "");
+            String[] list = line.split(";");
             Employee emp = new Employee();
+
             emp.setId(Integer.parseInt(list[0]));
             emp.setName(list[1]);
             emp.setmName(list[2]);
@@ -32,6 +35,8 @@ public class Filereader {
             emp.setJoin(LocalDate.parse(list[7]));
             emp.setBirth(LocalDate.parse(list[8]));
             emp.setbPlace(list[9]);
+
+            System.out.println(emp.getAddress());
         }
         sc.close();
     }

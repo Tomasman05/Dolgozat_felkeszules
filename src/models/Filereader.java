@@ -3,19 +3,22 @@ package models;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
-
+//  A számításokat is ide a models mappába kell tenni 
 public class Filereader {
-    public void readFile() {
+    ArrayList<Employee>emplist= new ArrayList<>();
+    public ArrayList<Employee> readFile() {
         try {
             tryReadFile();
         } catch (FileNotFoundException e) {
             System.err.println("A file nem található!");
             System.err.println(e.getMessage());
         }
+        return emplist;
     }
 
-    public void tryReadFile() throws FileNotFoundException {
+    public ArrayList<Employee> tryReadFile() throws FileNotFoundException {
         File file = new File("dolgozok.txt");
         Scanner sc = new Scanner(file, "utf-8");
         sc.nextLine();
@@ -35,9 +38,9 @@ public class Filereader {
             emp.setJoin(LocalDate.parse(list[7]));
             emp.setBirth(LocalDate.parse(list[8]));
             emp.setbPlace(list[9]);
-
-            System.out.println(emp.getAddress());
+            this.emplist.add(emp);
         }
         sc.close();
+        return emplist;
     }
 }
